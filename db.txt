@@ -1,0 +1,23 @@
+-- Elimina la base de datos si ya existe
+DROP DATABASE IF EXISTS bd_seguros3;
+
+-- Crea la base de datos
+CREATE DATABASE bd_seguros3 CHARSET utf8mb4;
+USE bd_seguros3;
+
+-- Crea la tabla de siniestros
+CREATE TABLE siniestros3 (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    poliza_id INT(11) NOT NULL,
+    descripcion VARCHAR(255) NOT NULL,
+    monto DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+-- Inserta datos de ejemplo en la tabla de siniestros
+INSERT INTO siniestros3 (poliza_id,  descripcion, monto) VALUES (1,'Accidente de tráfico', 1500.00);
+INSERT INTO siniestros3 (poliza_id,descripcion, monto) VALUES (2,'Robo en la casa', 2000.00);
+INSERT INTO siniestros3 (poliza_id,descripcion, monto) VALUES (3,'Incendio en el almacén', 5000.00);
+INSERT INTO siniestros3 (poliza_id,descripcion, monto) VALUES (4,'Incendio en el almacén', 8000.00);
+-- Confirma las transacciones
+COMMIT;
