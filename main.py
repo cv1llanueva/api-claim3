@@ -29,7 +29,7 @@ def get_claims():
     try:
         mydb = get_db_connection()
         cursor = mydb.cursor()
-        cursor.execute("SELECT * FROM siniestros2")
+        cursor.execute("SELECT * FROM siniestros3")
         result = cursor.fetchall()
     except mysql.connector.Error as err:
         raise HTTPException(status_code=500, detail=f"Database query error: {err}")
@@ -43,7 +43,7 @@ def get_claim(id: int):
     try:
         mydb = get_db_connection()
         cursor = mydb.cursor()
-        cursor.execute("SELECT * FROM siniestros2 WHERE id = %s", (id,))
+        cursor.execute("SELECT * FROM siniestros3 WHERE id = %s", (id,))
         result = cursor.fetchone()
         if result is None:
             raise HTTPException(status_code=404, detail="Claim not found")
@@ -62,7 +62,7 @@ def add_claim(item: schemas.Claim):
         descripcion = item.descripcion
         monto = item.monto
         cursor = mydb.cursor()
-        sql = "INSERT INTO siniestros2 (poliza_id, descripcion, monto) VALUES (%s, %s, %s)"
+        sql = "INSERT INTO siniestros3 (poliza_id, descripcion, monto) VALUES (%s, %s, %s)"
         val = (poliza_id, descripcion, monto)
         cursor.execute(sql, val)
         mydb.commit()
