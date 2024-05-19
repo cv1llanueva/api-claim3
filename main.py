@@ -56,6 +56,9 @@ def get_claim(id: int):
 # Add a new claim
 @app.post("/claims")
 def add_claim(item: schemas.Claim):
+    if not item.poliza_id or not item.descripcion or not item.monto:
+        raise HTTPException(status_code=400, detail="Todos los campos deben ser proporcionados")
+    
     try:
         mydb = get_db_connection()
         poliza_id = item.poliza_id
@@ -67,7 +70,7 @@ def add_claim(item: schemas.Claim):
         cursor.execute(sql, val)
         mydb.commit()
     except mysql.connector.Error as err:
-        raise HTTPException(status_code=500, detail=f"Database query error: {err}")
+        raise HTTPException(status_code=500, detail=f"Error en la consulta a la base de datos: {err}")
     finally:
         mydb.close()
-    return {"message": "Claim added successfully"}
+    return {"message": "Reclamación agregada exitosamente"}
