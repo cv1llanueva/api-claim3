@@ -8,7 +8,7 @@ host_name = "52.2.83.96"
 port_number = "8005"
 user_name = "root"
 password_db = "utec"
-database_name = "bd_seguros2"
+database_name = "bd_seguros3"
 
 def get_db_connection():
     try:
